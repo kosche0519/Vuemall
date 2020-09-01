@@ -1,0 +1,4 @@
+// 公共属性
+export const POP = 'pop';
+export const NEW = 'new';
+export const SELL = 'sell';

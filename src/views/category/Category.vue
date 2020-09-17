@@ -7,10 +7,10 @@
 
       <scroll id="tab-content" :data="[categoryData]">
         <div>
-          <tab-content-category :subcategories="showSubcategory"></tab-content-category>
+         <tab-content-category :subcategories="showSubcategory"></tab-content-category>
           <tab-control :titles="['综合', '新品', '销量']"
                        @itemClick="tabClick"></tab-control>
-          <tab-content-detail :category-detail="showCategoryDetail"></tab-content-detail>
+          
         </div>
       </scroll>
     </div>
@@ -67,7 +67,9 @@
 		  _getCategory() {
 		    getCategory().then(res => {
 		      // 1.获取分类数据
-		      this.categories = res.data.category.list
+					console.log(res)
+		      this.categories = res.data.data.category.list
+					
           // 2.初始化每个类别的子数据
           for (let i = 0; i < this.categories.length; i++) {
             this.categoryData[i] = {
@@ -87,7 +89,7 @@
         this.currentIndex = index;
 		    const mailKey = this.categories[index].maitKey;
         getSubcategory(mailKey).then(res => {
-          this.categoryData[index].subcategories = res.data
+          this.categoryData[index].subcategories = res.data.data
           this.categoryData = {...this.categoryData}
           this._getCategoryDetail(POP)
           this._getCategoryDetail(SELL)
